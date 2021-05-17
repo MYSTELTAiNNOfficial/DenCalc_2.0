@@ -1,0 +1,2 @@
+rootProject.name = "DenCalc2"
+include ':app'
