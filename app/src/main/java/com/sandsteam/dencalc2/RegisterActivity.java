@@ -188,6 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("err")) {
                         Toast.makeText(getApplicationContext(), obj.getString("Message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("Message2"), Toast.LENGTH_SHORT).show();
                         JSONObject userdata = obj.getJSONObject("user");
                         User user = new User(
                                 userdata.getInt("id"),
@@ -202,7 +203,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-
                 }
             }
         },
