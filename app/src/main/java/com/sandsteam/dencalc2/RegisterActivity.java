@@ -196,7 +196,7 @@ public class RegisterActivity extends AppCompatActivity {
                         );
                         SharedPref.getInstance(getApplicationContext()).userLogin(user);
                         //starting the profile activity
-                        startActivity(new Intent(getApplicationContext(), FragmentActivity.class));
+                        startActivity(new Intent(getApplicationContext(), FragmentActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("Message"), Toast.LENGTH_SHORT).show();
