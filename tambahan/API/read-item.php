@@ -10,7 +10,7 @@ $response["items"] = array();
 while ($data = mysqli_fetch_assoc($query)) {
     $obj = array(
         'id' => $data['id'],
-        'nama' => $data['nama'],
+        'nama_barang' => $data['nama_barang'],
         'jumlah' => $data['jumlah']
     );
     array_push($response["items"],$obj);

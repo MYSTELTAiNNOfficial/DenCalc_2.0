@@ -1,23 +1,22 @@
 <?php
-
 require('db-controller.php');
 header('Content-Type: application/json');
 
-if(!empty($_POST)){
-    $nama = $_POST['nama'];
+if (!empty($_POST)) {
+    $nama_barang = $_POST['nama_barang'];
     $jumlah = $_POST['jumlah'];
-    $id_user = $_POST['id_user'];
+    $id_user = 1;
 
-    $query = $conn->prepare("INSERT INTO items(id_user,nama, jumlah) VALUES (?,?,?)");
-    $query->bind_param("isi", $id_user,$nama,$jumlah);
+    $query = $conn->prepare("INSERT INTO items(nama_barang, jumlah) VALUES (?,?)");
+    $query->bind_param("si", $nama_barang, $jumlah);
     $result = $query->execute();
 
-    if($result){
+    if ($result) {
         $response['Message'] = "Data Created";
-    }else{
+    } else {
         $response['Message'] = "Failed to save!";
     }
-}else{
+} else {
     $response['Message'] = "No POST Data!";
 }
 
@@ -25,5 +24,4 @@ $query->close();
 $conn->close();
 
 echo json_encode($response);
-
 ?>

@@ -22,6 +22,7 @@ if ($query->num_rows > 0) {
     );
     $response['err'] = false;
     $response["user"] = $user;
+    $response['Message'] = "Login Successful!";
 } else {
     $response['err'] = true;
     $response['Message'] = "Username or Password incorrect!";

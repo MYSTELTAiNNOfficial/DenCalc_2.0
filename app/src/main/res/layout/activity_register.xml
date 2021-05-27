@@ -107,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/roundbutton2"
+        android:editable="false"
         android:text="REGISTER"
         app:layout_constraintEnd_toEndOf="@+id/regis_textInputPass2"
         app:layout_constraintStart_toStartOf="@+id/regis_textInputPass2"

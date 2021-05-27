@@ -81,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                 String username = login_textInputUser.getEditText().getText().toString().trim();
                 if (username == "") {
                     login_textInputUser.setError("Masukkan Username anda");
+                }else{
+                    login_textInputUser.setError(null);
                 }
             }
         });
@@ -93,7 +95,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String password = login_textInputPass.getEditText().getText().toString().trim();
-
+                if (password.length() < 8 || password.length() > 20) {
+                    login_textInputPass.setError("Password must be 8 to 20 characters");
+                }else{
+                    login_textInputPass.setError(null);
+                }
             }
 
             @Override
@@ -101,11 +107,8 @@ public class LoginActivity extends AppCompatActivity {
                 String password = login_textInputPass.getEditText().getText().toString().trim();
                 if (password == "") {
                     login_textInputPass.setError("Masukkan Password anda");
-                }
-                if (password.length() < 8 || password.length() > 20) {
-                    login_textInputPass.setError("Password must be 8 to 20 characters");
                 }else{
-                    login_textInputPass.setError("");
+                    login_textInputPass.setError(null);
                 }
             }
         });
@@ -122,13 +125,14 @@ public class LoginActivity extends AppCompatActivity {
         String url = "http://192.168.1.68/API/login.php";
         final String username = login_textInputUser.getEditText().getText().toString().trim();
         final String password = login_textInputPass.getEditText().getText().toString().trim();
-        StringRequest stringRequest  = new StringRequest (Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest myReq  = new StringRequest (Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         try {
                             JSONObject obj = new JSONObject(response);
                             if (!obj.getBoolean("err")) {
+                                Toast.makeText(getApplicationContext(), obj.getString("Message"), Toast.LENGTH_SHORT).show();
                                 JSONObject userdata = obj.getJSONObject("user");
                                 User user = new User(
                                         userdata.getInt("id"),
@@ -136,8 +140,8 @@ public class LoginActivity extends AppCompatActivity {
                                 );
                                 SharedPref.getInstance(getApplicationContext()).userLogin(user);
                                 //starting the profile activity
-                                finish();
                                 startActivity(new Intent(getApplicationContext(), FragmentActivity.class));
+                                finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("Message"), Toast.LENGTH_SHORT).show();
                             }
@@ -161,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                 return params;
             }
         };
-        VolleyManage.getInstance(this).addToRequestQueue(stringRequest);
+        VolleyManage.getInstance(this).addToRequestQueue(myReq);
     }
 
 }
