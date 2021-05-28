@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         if (SharedPref.getInstance(this).isLoggedIn()) {
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, FragmentActivity.class));
         }
         initView();
         setListen();
