@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Bulan Mei 2021 pada 18.12
+-- Waktu pembuatan: 30 Bulan Mei 2021 pada 15.24
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `nama_barang` text NOT NULL,
   `tipe_barang` varchar(255) NOT NULL,
   `watt_barang` int(11) NOT NULL,
+  `total_pemakaian` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
