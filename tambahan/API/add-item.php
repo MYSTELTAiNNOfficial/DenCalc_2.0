@@ -3,12 +3,14 @@ require('db-controller.php');
 header('Content-Type: application/json');
 
 if (!empty($_POST)) {
-    $nama_barang = $_POST['nama_barang'];
+    $tipe_barang = $_POST['tipe_barang'];
+    $watt_barang = $_POST['watt_barang'];
+    $total_pemakaian = $_POST['total pemakaian'];
     $jumlah = $_POST['jumlah'];
     $id_user = 1;
 
-    $query = $conn->prepare("INSERT INTO items(nama_barang, jumlah) VALUES (?,?)");
-    $query->bind_param("si", $nama_barang, $jumlah);
+    $query = $conn->prepare("INSERT INTO items(tipe_barang, watt_barang, total_pemakaian, jumlah) VALUES (?,?,?,?)");
+    $query->bind_param("siii", $tipe_barang, $watt_barang, $total_pemakaian, $jumlah);
     $result = $query->execute();
 
     if ($result) {

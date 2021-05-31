@@ -13,12 +13,12 @@
         android:id="@+id/tampilan_Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:text="Home"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,11 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="52dp"
         android:fontFamily="sans-serif-black"
         android:text="Total Biaya:"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tampilan_Home" />
 
@@ -95,19 +95,38 @@
         android:fontFamily="sans-serif-black"
         android:text="Pilih Golongan:"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tampilan_totalBiaya"
         app:layout_constraintTop_toBottomOf="@+id/tampilan_totalBiaya" />
 
-    <Spinner
-        android:id="@+id/frhome_spinerGolongan"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/tampilan_pilihGolongan" />
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tampilan_pilihGolongan">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/frhome_spinerGolongan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

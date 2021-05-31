@@ -7,26 +7,54 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-public class HomeFragment extends Fragment {
+import java.util.ArrayList;
 
-    private View home_view;
+import AddOn.Barang;
 
+public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    private View view;
+
+    private TextView frhome_editText_totalBiaya;
     private Spinner frhome_spinerGolongan;
+    private String total_Biaya;
+    private ArrayAdapter<CharSequence> myAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        home_view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        frhome_spinerGolongan = (Spinner) home_view.findViewById(R.id.frhome_spinerGolongan);
+        initView();
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(HomeFragment.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.tesData_golongan));
+        return view;
+    }
+
+    private void initView() {
+        frhome_editText_totalBiaya = view.findViewById(R.id.frhome_editText_totalBiaya);
+        frhome_spinerGolongan = (Spinner) view.findViewById(R.id.frhome_spinerGolongan);
+
+        //Spinner Golongan
+        myAdapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.tesData_golongan, android.R.layout.simple_spinner_item);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frhome_spinerGolongan.setAdapter(myAdapter);
+        /////////\\\\\\\\\
+    }
 
-        return home_view;
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
