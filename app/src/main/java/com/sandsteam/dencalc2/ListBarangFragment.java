@@ -3,6 +3,7 @@ package com.sandsteam.dencalc2;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -36,7 +39,7 @@ import AddOn.VolleyManage;
 public class ListBarangFragment extends Fragment {
 
     private View view;
-    private User user = SharedPref.getInstance(getActivity()).getUser();
+    private User user;
     private RecyclerView frList_recyclerViewBarang;
     private ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
@@ -46,7 +49,6 @@ public class ListBarangFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_list_barang, container, false);
-
         initView();
         setRV();
         loadDB();
@@ -57,6 +59,7 @@ public class ListBarangFragment extends Fragment {
         frList_recyclerViewBarang = view.findViewById(R.id.frList_recyclerViewBarang);
         barangs = new ArrayList<Barang>();
         rvAdapter = new RVAdapter(barangs);
+        user = SharedPref.getInstance(getActivity()).getUser();
     }
 
     private void setRV() {
@@ -68,41 +71,43 @@ public class ListBarangFragment extends Fragment {
     private void loadDB() {
         final String id = String.valueOf(user.getId());
         String url = "http://192.168.1.68/API/read-item.php";
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, null,
-                new Response.Listener<JSONObject>() {
+        StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
                         try {
-                            JSONArray jsonItem = response.getJSONArray("items");
-                            for (int i = 0; i < jsonItem.length(); i++) {
-                                JSONObject obj = jsonItem.getJSONObject(i);
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray temp = obj.getJSONArray("items");
+                            for (int i = 0; i < temp.length(); i++) {
+                                JSONObject obj1 = temp.getJSONObject(i);
                                 Barang barangBaru = new Barang();
-                                barangBaru.setId(obj.getInt("id"));
-                                barangBaru.setTipe_barang(obj.getString("tipe_barang"));
-                                barangBaru.setJumlah(obj.getInt("jumlah"));
-                                barangBaru.setTotal_pemakaian(obj.getInt("total_pemakaian"));
-                                barangBaru.setWatt_barang(obj.getInt("watt_barang"));
+                                barangBaru.setId(obj1.getInt("id"));
+                                barangBaru.setTipe_barang(obj1.getString("tipe_barang"));
+                                barangBaru.setWatt_barang(obj1.getInt("watt_barang"));
+                                barangBaru.setTotal_pemakaian(obj1.getInt("total_pemakaian"));
+                                barangBaru.setJumlah(obj1.getInt("jumlah"));
                                 barangs.add(barangBaru);
                             }
                             rvAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
-        ) {
+        ){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("id", id);
-                return params;
+                Map<String, String> data = new HashMap<>();
+                data.put("id", id);
+                return data;
             }
         };
         VolleyManage.getInstance(getActivity()).addToRequestQueue(req);
