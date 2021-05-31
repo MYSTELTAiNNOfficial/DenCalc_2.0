@@ -4,4 +4,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="klikdisini1">Tidak punya akun? <u>Klik disini untuk mendaftar</u></string>
     <string name="klikdisini2">Sudah punya akun? <u>Klik disini untuk login</u></string>
+
+    <string-array name="tesData_golongan">
+        <item>R-1/TR (450VA - Rp. 165/KWH)</item>
+        <item>R-1/TR (900VA - Rp. 274/KWh)</item>
+        <item>R-1M/TR (900VA - Rp. 1352/KWh)</item>
+        <item>R-1/TR (1300VA - Rp. 1444.70/KWh)</item>
+        <item>R-1/TR (2200VA - Rp. 1444.70/KWh)</item>
+        <item>R-2/TR (5500VA - Rp. 1444.70/KWh)</item>
+        <item>R-3/TR (> 5500VA - Rp. 1444.70/KWh)</item>
+    </string-array>
+
 </resources>
