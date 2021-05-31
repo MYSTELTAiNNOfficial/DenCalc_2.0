@@ -42,7 +42,7 @@ public class SharedPref {
     public User getUser() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
-                sharedPreferences.getInt(KEY_ID, -1),
+                sharedPreferences.getInt(KEY_ID, 0),
                 sharedPreferences.getString(KEY_USERNAME, null)
         );
     }
