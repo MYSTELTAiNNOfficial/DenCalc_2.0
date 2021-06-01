@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,6 +30,7 @@ import java.util.Map;
 
 import AddOn.Barang;
 import AddOn.SharedPref;
+import AddOn.Storage;
 import AddOn.User;
 import AddOn.VolleyManage;
 
@@ -38,10 +40,14 @@ public class ListBarangFragment extends Fragment {
     private View view;
     private User user;
     private Button frList_buttonTambah;
+    private TextView frList_text_golonganInfo;
     private RecyclerView frList_recyclerViewBarang;
     private ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
     private Button frList_button_hitungBiaya;
+
+    private String golongan;
+    private Storage gate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,10 +64,14 @@ public class ListBarangFragment extends Fragment {
     private void initView() {
         frList_recyclerViewBarang = view.findViewById(R.id.frList_recyclerViewBarang);
         frList_button_hitungBiaya = view.findViewById(R.id.frList_button_hitungBiaya);
+        frList_text_golonganInfo = view.findViewById(R.id.frList_text_golonganInfo);
 
-        barangs = new ArrayList<Barang>();
+        gate = new Storage();
+        barangs = gate.getListBarangs();
+        golongan = gate.getGolongan();
         rvAdapter = new RVAdapter(barangs);
         user = SharedPref.getInstance(getActivity()).getUser();
+        frList_text_golonganInfo.setText(golongan);
         frList_buttonTambah = view.findViewById(R.id.frList_buttonTambah);
     }
 

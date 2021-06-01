@@ -16,18 +16,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import AddOn.Barang;
+import AddOn.Storage;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private View view;
+    private Storage gate;
 
     private TextView frhome_editText_totalBiaya;
     private Spinner frhome_spinerGolongan;
-    private String total_Biaya;
+    private String total_Biaya, golongan;
     private ArrayAdapter<CharSequence> myAdapter;
-    private ListBarangFragment listBF;
     private ArrayList<Barang> barangs;
     private double rupiah_golongan;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,8 +44,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private void initView() {
         frhome_editText_totalBiaya = view.findViewById(R.id.frhome_editText_totalBiaya);
         frhome_spinerGolongan = (Spinner) view.findViewById(R.id.frhome_spinerGolongan);
-        listBF = new ListBarangFragment();
-        barangs = listBF.getListBarang();
+        gate = new Storage();
+        barangs = gate.getListBarangs();
+        golongan = gate.getGolongan();
         //Spinner Golongan
         myAdapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.tesData_golongan, android.R.layout.simple_spinner_item);
@@ -57,7 +60,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         Toast.makeText(getContext(),"Saya Memilih "+myAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-        String golongan = myAdapter.getItem(position).toString();
+        golongan = myAdapter.getItem(position).toString();
         Toast.makeText(getContext(),"Golongan: "+golongan, Toast.LENGTH_SHORT).show();
         if(golongan == "R-1/TR (450VA - Rp. 165/KWH)"){
             rupiah_golongan = 165;
@@ -100,4 +103,5 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         total_Biaya = String.valueOf(bulan);
         return total_Biaya;
     }
+
 }
