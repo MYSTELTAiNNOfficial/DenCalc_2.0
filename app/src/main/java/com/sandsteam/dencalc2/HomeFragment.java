@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,13 +45,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 R.array.tesData_golongan, android.R.layout.simple_spinner_item);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frhome_spinerGolongan.setAdapter(myAdapter);
-        /////////\\\\\\\\\
+        //------------------------------------------------------------------------------------\\
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        Toast.makeText(getContext(),"Saya Memilih "+myAdapter.getItem(position), Toast.LENGTH_SHORT).show();
     }
 
     @Override
