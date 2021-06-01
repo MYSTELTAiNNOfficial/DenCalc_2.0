@@ -4,13 +4,13 @@ header('Content-Type: application/json');
 
 if (!empty($_POST)) {
     $tipe_barang = $_POST['tipe_barang'];
-    $watt_barang = $_POST['watt_barang'];
-    $total_pemakaian = $_POST['total pemakaian'];
     $jumlah = $_POST['jumlah'];
-    $id_user = 1;
+    $id_user = $_POST['id_user'];
+    $watt_barang = $_POST['watt_barang'];
+    $total_pemakaian = $_POST['total_pemakaian'];
 
-    $query = $conn->prepare("INSERT INTO items(tipe_barang, watt_barang, total_pemakaian, jumlah) VALUES (?,?,?,?)");
-    $query->bind_param("siii", $tipe_barang, $watt_barang, $total_pemakaian, $jumlah);
+    $query = $conn->prepare("INSERT INTO items(id, id_user ,tipe_barang,watt_barang,total_pemakaian, jumlah) VALUES (null,?,?,?,?,?)");
+    $query->bind_param("isiii", $id_user,$tipe_barang,$watt_barang,$total_pemakaian, $jumlah);
     $result = $query->execute();
 
     if ($result) {

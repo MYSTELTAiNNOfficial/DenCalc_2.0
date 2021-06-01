@@ -5,9 +5,10 @@ header('Content-Type: application/json');
 
 if (!empty($_POST)) {
     $id = $_POST['id'];
-    $nama = $_POST['nama'];
+    $tipe_barang = $_POST['tipe_barang'];
     $jumlah = $_POST['jumlah'];
-    $created_date = $time;
+    $watt_barang = $_POST['watt_barang'];
+    $total_pemakaian = $_POST['total_pemakaian'];
     $query = $conn->prepare("SELECT * FROM items WHERE id = ?");
     $query->bind_param('i', $id);
     $query->execute();
@@ -15,8 +16,8 @@ if (!empty($_POST)) {
 
     if ($result->num_rows > 0) {
 
-        $query = $conn->prepare("UPDATE items SET nama=?,jumlah=? WHERE id=?");
-        $query->bind_param("sii", $nama, $jumlah, $id);
+        $query = $conn->prepare("UPDATE items SET tipe_barang=?,watt_barang=?,total_pemakaian=?, jumlah=? WHERE id=?");
+        $query->bind_param("siiii", $tipe_barang,$watt_barang,$total_pemakaian, $jumlah, $id);
         $result = $query->execute();
 
         if ($result) {

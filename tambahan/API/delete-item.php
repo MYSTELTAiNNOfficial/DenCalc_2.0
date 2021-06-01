@@ -6,23 +6,15 @@ header('Content-Type: application/json');
 if (!empty($_POST)) {
     $id = $_POST['id'];
 
-    $query = $conn->prepare("SELECT * FROM items WHERE id = ?");
+
+    $query = $conn->prepare("DELETE FROM items WHERE id=?");
     $query->bind_param('i', $id);
-    $query->execute();
-    $result = $query->get_result();
+    $result = $query->execute();
 
-    if ($result->num_rows > 0) {
-        $query = $conn->prepare("DELETE FROM items WHERE id=?");
-        $query->bind_param('i', $id);
-        $result = $query->execute();
-
-        if ($result) {
-            $response['Message'] = "Data Deleted";
-        } else {
-            $response['Message'] = "Failed to delete";
-        }
+    if ($result) {
+        $response['Message'] = "Data Deleted";
     } else {
-        $response['Message'] = "Data not found";
+        $response['Message'] = "Failed to delete";
     }
 } else {
     $response['Message'] = "No Post Data";
