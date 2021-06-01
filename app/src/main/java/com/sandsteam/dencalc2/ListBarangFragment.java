@@ -1,9 +1,8 @@
 package com.sandsteam.dencalc2;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,16 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +37,7 @@ public class ListBarangFragment extends Fragment {
 
     private View view;
     private User user;
+    private Button frList_buttonTambah;
     private RecyclerView frList_recyclerViewBarang;
     private ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
@@ -52,6 +50,7 @@ public class ListBarangFragment extends Fragment {
         initView();
         setRV();
         loadDB();
+        setListen();
         return view;
     }
 
@@ -60,12 +59,22 @@ public class ListBarangFragment extends Fragment {
         barangs = new ArrayList<Barang>();
         rvAdapter = new RVAdapter(barangs);
         user = SharedPref.getInstance(getActivity()).getUser();
+        frList_buttonTambah = view.findViewById(R.id.frList_buttonTambah);
     }
 
     private void setRV() {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity().getBaseContext());
         frList_recyclerViewBarang.setLayoutManager(manager);
         frList_recyclerViewBarang.setAdapter(rvAdapter);
+    }
+
+    private void setListen(){
+        frList_buttonTambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), TambahActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
     }
 
     private void loadDB() {

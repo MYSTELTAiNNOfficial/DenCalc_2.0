@@ -134,16 +134,31 @@
 
     <Button
         android:id="@+id/frList_button_hitungBiaya"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="#FFDE59"
         android:clickable="true"
         android:elevation="10dp"
         android:fontFamily="sans-serif-black"
         android:text="Hitung Biaya"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/frList_buttonTambah"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/frList_buttonTambah"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#FFDE59"
+        android:fontFamily="sans-serif-black"
+        android:text="Tambah Barang"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/frList_button_hitungBiaya" />
 </androidx.constraintlayout.widget.ConstraintLayout>
