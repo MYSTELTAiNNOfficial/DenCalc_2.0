@@ -65,11 +65,18 @@ public class TambahActivity extends AppCompatActivity {
         tambah_spinnerTipe.setAdapter(arrayAdapter_tipe);
 
     }
+    @Override
+    public void onBackPressed()
+    {
+        startActivity(new Intent(getBaseContext(), FragmentActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();
+    }
 
     private void setListen(){
         tambah_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), FragmentActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }
         });
