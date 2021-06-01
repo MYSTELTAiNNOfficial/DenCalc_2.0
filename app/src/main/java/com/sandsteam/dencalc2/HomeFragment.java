@@ -56,6 +56,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        Toast.makeText(getContext(),"Tidak memilih apapun", Toast.LENGTH_SHORT).show();
     }
 }
