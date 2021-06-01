@@ -41,6 +41,7 @@ public class ListBarangFragment extends Fragment {
     private RecyclerView frList_recyclerViewBarang;
     private ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
+    private Button frList_button_hitungBiaya;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +57,8 @@ public class ListBarangFragment extends Fragment {
 
     private void initView() {
         frList_recyclerViewBarang = view.findViewById(R.id.frList_recyclerViewBarang);
+        frList_button_hitungBiaya = view.findViewById(R.id.frList_button_hitungBiaya);
+
         barangs = new ArrayList<Barang>();
         rvAdapter = new RVAdapter(barangs);
         user = SharedPref.getInstance(getActivity()).getUser();
@@ -120,5 +123,9 @@ public class ListBarangFragment extends Fragment {
             }
         };
         VolleyManage.getInstance(getActivity()).addToRequestQueue(req);
+    }
+
+    public ArrayList<Barang> getListBarang(){
+        return barangs;
     }
 }
