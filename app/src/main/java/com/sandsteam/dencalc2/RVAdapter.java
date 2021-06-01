@@ -80,7 +80,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.BarangViewHold> {
         }
     }
     private void deleteProcess(String id_item, int index){
-        String url = "http://192.168.1.68/API/delete-item.php";
+        String url = "http://54.145.5.105/delete-item.php";
         StringRequest req = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

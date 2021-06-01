@@ -106,7 +106,7 @@ public class TambahActivity extends AppCompatActivity {
                     watt_barang = getResources().getStringArray(R.array.watt_kangin);
                     arrayAdapter_watt = new ArrayAdapter(getBaseContext(), android.R.layout.simple_spinner_item,watt_barang);
                 }
-                temp_tipe = parent.getItemAtPosition(position).toString();;
+                temp_tipe = parent.getItemAtPosition(position).toString();
                 arrayAdapter_watt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 tambah_spinnerWatt.setAdapter(arrayAdapter_watt);
             }
@@ -143,7 +143,7 @@ public class TambahActivity extends AppCompatActivity {
         final String id_user = String.valueOf(user.getId());
         final String jumlah = tambah_textJumlah.getEditableText().toString().trim();
         final String pakai = tambah_textPakai.getEditableText().toString().trim();
-        String url = "http://192.168.1.68/API/add-item.php";
+        String url = "http://54.145.5.105/add-item.php";
         StringRequest req = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
