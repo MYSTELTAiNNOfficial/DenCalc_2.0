@@ -21,16 +21,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="181dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/cv_deleteButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.671"
                 app:srcCompat="@mipmap/electric_icon" />
 
             <TextView
@@ -117,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-black"
                 android:text="Lampu"
                 android:textSize="20sp"
@@ -128,21 +129,21 @@
                 android:id="@+id/cv_editButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_kategoriBarang"
                 app:srcCompat="@mipmap/edit_icon2" />
 
             <ImageView
                 android:id="@+id/cv_deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="36dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cv_editButton"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/cv_editButton"
+                app:layout_constraintTop_toBottomOf="@+id/cv_editButton"
                 app:srcCompat="@mipmap/delete_icon1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

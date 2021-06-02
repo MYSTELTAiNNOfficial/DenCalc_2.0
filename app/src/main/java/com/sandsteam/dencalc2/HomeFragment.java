@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,12 +25,16 @@ public class HomeFragment extends Fragment{
     private View view;
     private Storage gate;
 
-    private EditText frhome_editText_totalBiaya;
     private Spinner frhome_spinerGolongan;
-    private String total_Biaya, golongan, tempGolongan;
+    private Button frhome_simpanButton;
+    private String total_Biaya, tempGolongan;
     private ArrayAdapter<CharSequence> myAdapter;
     private ArrayList<Barang> barangs;
-    private TextView choosenGolongan, choosenVA, choosenRupiah;
+    private TextView frhome_editText_totalBiaya, choosenGolongan, choosenVA, choosenRupiah;
+
+
+    private String nama_golongan = "", va_golongan = "", toString_rupiahGolongan = "";
+    private double rupiah_golongan = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,18 +47,25 @@ public class HomeFragment extends Fragment{
     }
 
     private void setListen() {
+        frhome_simpanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                frhome_editText_totalBiaya.setText(String.valueOf(hitungBiaya(barangs, rupiah_golongan)));
+                gate.choosenGolongan[0] = nama_golongan;
+                gate.choosenGolongan[1] = va_golongan;
+                gate.choosenGolongan[2] = String.valueOf(rupiah_golongan);
+                Toast.makeText(getContext(), "Golongan Dipilih: "+gate.choosenGolongan[0]+", "+gate.choosenGolongan[1], Toast.LENGTH_LONG).show();
+            }
+        });
+
         frhome_spinerGolongan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String nama_golongan = "", va_golongan = "", toString_rupiahGolongan = "";
-                double rupiah_golongan = 0;
-
-
                 if(position == 0){
                     nama_golongan = "R-1/TR";
                     va_golongan = "450 VoltAmpere";
                     rupiah_golongan = 165;
-                    tempGolongan = parent.getItemAtPosition(position).toString();
+                    tempGolongan = String.valueOf(parent.getItemAtPosition(position));
                 }else if(position == 1){
                     nama_golongan = "R-1/TR";
                     va_golongan = "900 VoltAmpere";
@@ -86,13 +98,9 @@ public class HomeFragment extends Fragment{
                     tempGolongan = parent.getItemAtPosition(position).toString();
                 }
                 toString_rupiahGolongan = "Rp "+String.valueOf(rupiah_golongan)+"/kWH";
-
-                gate.setGolongan(tempGolongan);
                 choosenGolongan.setText(nama_golongan);
                 choosenVA.setText(va_golongan);
                 choosenRupiah.setText(toString_rupiahGolongan);
-
-                frhome_editText_totalBiaya.setText(hitungBiaya(barangs, rupiah_golongan));
             }
 
             @Override
@@ -100,17 +108,22 @@ public class HomeFragment extends Fragment{
 
             }
         });
+
+
+
     }
 
     private void initView() {
         frhome_editText_totalBiaya = view.findViewById(R.id.frhome_editText_totalBiaya);
         frhome_spinerGolongan = (Spinner) view.findViewById(R.id.frhome_spinerGolongan);
-        gate = new Storage();
-        barangs = gate.getListBarangs();
-
+        frhome_simpanButton = view.findViewById(R.id.frhome_simpanButton);
         choosenGolongan = view.findViewById(R.id.home_choosenGolongan);
         choosenVA = view.findViewById(R.id.home_choosenVA);
         choosenRupiah = view.findViewById(R.id.home_choosenRupiah);
+
+        gate = new Storage();
+        barangs = gate.getListBarangs();
+
 
         //Spinner Golongan
         myAdapter = ArrayAdapter.createFromResource(this.getContext(),
@@ -121,20 +134,18 @@ public class HomeFragment extends Fragment{
     }
 
 
-
     public String hitungBiaya(ArrayList<Barang> barangs, double rupiah_golongan){
         double wattHours = 0;
         double kiloWattHours, hari, bulan;
         for(int i = 0; i < barangs.size(); i++){
             Barang barangTemp = barangs.get(i);
-            double wattTemp = (double) (barangTemp.getWatt_barang());
-            double pemakaianTemp = (double) barangTemp.getTotal_pemakaian();
-            double jumlahTemp = (double) barangTemp.getJumlah();
+            double wattTemp = Double.valueOf(barangTemp.getWatt_barang());
+            double pemakaianTemp = Double.valueOf(barangTemp.getTotal_pemakaian());
+            double jumlahTemp = Double.valueOf(barangTemp.getJumlah());
             double temp = wattTemp*pemakaianTemp*jumlahTemp;
             wattHours += temp;
         }
         kiloWattHours = wattHours / 1000;
-        System.out.println("Total pemakaian daya listrik : " + kiloWattHours + " KWh");
         hari = kiloWattHours * rupiah_golongan;
         bulan = hari * 30;
         total_Biaya = String.valueOf(bulan);

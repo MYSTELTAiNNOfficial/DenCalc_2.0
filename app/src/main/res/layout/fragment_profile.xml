@@ -48,7 +48,6 @@
         android:id="@+id/textView8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:background="#ffde59"
         android:fontFamily="sans-serif-black"
         android:paddingStart="32dp"
