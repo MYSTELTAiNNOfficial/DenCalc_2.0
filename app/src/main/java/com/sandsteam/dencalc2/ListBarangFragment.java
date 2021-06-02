@@ -135,7 +135,4 @@ public class ListBarangFragment extends Fragment {
         VolleyManage.getInstance(getActivity()).addToRequestQueue(req);
     }
 
-    public ArrayList<Barang> getListBarang(){
-        return barangs;
-    }
 }

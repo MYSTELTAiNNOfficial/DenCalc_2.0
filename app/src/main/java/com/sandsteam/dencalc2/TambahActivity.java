@@ -65,6 +65,7 @@ public class TambahActivity extends AppCompatActivity {
         tambah_spinnerTipe.setAdapter(arrayAdapter_tipe);
 
     }
+
     @Override
     public void onBackPressed()
     {
