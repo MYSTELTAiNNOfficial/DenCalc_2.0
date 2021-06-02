@@ -11,14 +11,17 @@
         android:id="@+id/tampilan_daftarBarang"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="32dp"
         android:background="#ffde59"
         android:fontFamily="sans-serif-black"
         android:paddingStart="32dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:text="Daftar Barang:"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,9 +42,9 @@
         android:id="@+id/tampilan_cardView_golListrik"
         android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         app:cardBackgroundColor="#FFDE59"
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,16 +56,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Silahkan Pilih Golongan di Beranda"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/frList_text_golonganInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -70,8 +63,23 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:gravity="center"
-                android:text="X"
+                android:text="-"
                 android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/no_data_information"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="Silahkan Pilih Golongan di Beranda"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,11 +89,12 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/frList_button_hitungBiaya"
@@ -106,7 +115,6 @@
         android:id="@+id/frList_button_hitungBiaya"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#FFDE59"
         android:clickable="true"
@@ -115,20 +123,19 @@
         android:text="Hitung Biaya"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/frList_buttonTambah"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/cardView3" />
 
     <Button
         android:id="@+id/frList_buttonTambah"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginEnd="44dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#FFDE59"
         android:fontFamily="sans-serif-black"
         android:text="Tambah Barang"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardView3"
         app:layout_constraintStart_toEndOf="@+id/frList_button_hitungBiaya" />
 </androidx.constraintlayout.widget.ConstraintLayout>

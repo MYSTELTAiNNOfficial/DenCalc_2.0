@@ -26,6 +26,8 @@ import java.util.Map;
 import AddOn.Barang;
 import AddOn.VolleyManage;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.BarangViewHold> {
 
     private ArrayList<Barang> liistBarang;
@@ -70,6 +72,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.BarangViewHold> {
             cv_kategoriBarang = itemView.findViewById(R.id.cv_kategoriBarang);
             cv_editButton = itemView.findViewById(R.id.cv_editButton);
             cv_deleteButton = itemView.findViewById(R.id.cv_deleteButton);
+
             cv_deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -77,6 +80,18 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.BarangViewHold> {
                     deleteProcess(id_item, index);
                 }
             });
+
+            cv_editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, EditBarangActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+
+
+                }
+            });
+
         }
     }
     private void deleteProcess(String id_item, int index){

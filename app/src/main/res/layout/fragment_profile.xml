@@ -11,9 +11,10 @@
         android:id="@+id/imageView4"
         android:layout_width="0dp"
         android:layout_height="164dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="92dp"
         android:src="@mipmap/profile_icon1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,5 +43,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#ffde59"
+        android:fontFamily="sans-serif-black"
+        android:paddingStart="32dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Profile"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

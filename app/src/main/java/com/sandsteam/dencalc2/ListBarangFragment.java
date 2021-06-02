@@ -40,7 +40,7 @@ public class ListBarangFragment extends Fragment {
     private View view;
     private User user;
     private Button frList_buttonTambah;
-    private TextView frList_text_golonganInfo;
+    private TextView frList_text_golonganInfo, no_data_information;
     private RecyclerView frList_recyclerViewBarang;
     private ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
@@ -65,6 +65,7 @@ public class ListBarangFragment extends Fragment {
         frList_recyclerViewBarang = view.findViewById(R.id.frList_recyclerViewBarang);
         frList_button_hitungBiaya = view.findViewById(R.id.frList_button_hitungBiaya);
         frList_text_golonganInfo = view.findViewById(R.id.frList_text_golonganInfo);
+        no_data_information = view.findViewById(R.id.no_data_information);
 
         gate = new Storage();
         barangs = gate.getListBarangs();
@@ -86,6 +87,13 @@ public class ListBarangFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), TambahActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
+
+        frList_button_hitungBiaya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Calculated, Go Back to Home!", Toast.LENGTH_SHORT).show();
             }
         });
     }

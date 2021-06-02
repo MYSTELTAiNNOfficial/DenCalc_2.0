@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -52,7 +51,7 @@ public class TambahActivity extends AppCompatActivity {
         tambah_spinnerTipe = findViewById(R.id.tambah_spinnerTipe);
         tambah_spinnerWatt = findViewById(R.id.tambah_spinnerWatt);
         tipe_barang = getResources().getStringArray(R.array.tipe_barang);
-        tambah_button = findViewById(R.id.tambah_button);
+        tambah_button = findViewById(R.id.edit_button);
         tambah_textPakai = findViewById(R.id.tambah_textPakai);
         tambah_textJumlah = findViewById(R.id.tambah_textJumlah);
         user = SharedPref.getInstance(this).getUser();
