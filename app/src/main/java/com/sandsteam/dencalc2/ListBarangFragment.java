@@ -42,11 +42,10 @@ public class ListBarangFragment extends Fragment {
     private Button frList_buttonTambah;
     private TextView frList_text_golonganInfo, no_data_information;
     private RecyclerView frList_recyclerViewBarang;
-    private ArrayList<Barang> barangs;
+    private static ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
     private Button frList_button_hitungBiaya;
 
-    private String golongan;
     private Storage gate;
 
     @Override
@@ -67,16 +66,8 @@ public class ListBarangFragment extends Fragment {
         frList_text_golonganInfo = view.findViewById(R.id.frList_text_golonganInfo);
         no_data_information = view.findViewById(R.id.no_data_information);
 
-        gate = new Storage();
-        barangs = gate.getListBarangs();
-        golongan = gate.choosenGolongan[0]+" "+gate.choosenGolongan[1]+" "+gate.choosenGolongan[2];
-
-        if (golongan == " ") {
-            no_data_information.setVisibility(View.VISIBLE);
-            frList_text_golonganInfo.setVisibility(View.GONE);
-        }
-
-
+        barangs = Storage.barangs;
+        String golongan = Storage.choosenGolongan[0] + " | " + Storage.choosenGolongan[1] + " Volt Ampere | " + Storage.choosenGolongan[2]+"/kWH";
 
         rvAdapter = new RVAdapter(barangs);
         user = SharedPref.getInstance(getActivity()).getUser();

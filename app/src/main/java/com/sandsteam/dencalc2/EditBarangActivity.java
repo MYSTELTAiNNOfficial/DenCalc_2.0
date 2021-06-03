@@ -29,9 +29,6 @@ import AddOn.User;
 import AddOn.VolleyManage;
 
 public class EditBarangActivity extends AppCompatActivity {
-
-    private User user;
-
     private TextView update_textTipe, update_textWatt;
     private EditText update_textPakai, update_textJumlah;
     private Button edit_button;
@@ -46,10 +43,10 @@ public class EditBarangActivity extends AppCompatActivity {
 
         initView();
         loadDB(id);
-        setListen();
+        setListen(id);
     }
 
-    private void setListen() {
+    private void setListen(int id) {
         edit_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,11 +58,9 @@ public class EditBarangActivity extends AppCompatActivity {
         edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                editProcess();
+                editProcess(id);
             }
         });
-
     }
 
     private void initView() {
@@ -81,21 +76,17 @@ public class EditBarangActivity extends AppCompatActivity {
     private void loadDB(int id){
         final String temp = String.valueOf(id);
         String url = "http://54.145.5.105/readbyid-item.php";
-        StringRequest myReq = new StringRequest(Request.Method.POST, url,
+        StringRequest req = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject obj = new JSONObject(response);
                             JSONObject temp = obj.getJSONObject("items");
-                  //          JSONObject obj1 = temp.getJSONObject(id);
-// ////          ////   Toast.makeText(getApplicationContext(), String.valueOf(obj1.getString("tipe_barang")), Toast.LENGTH_SHORT).show();
-
                                 update_textTipe.setText(temp.getString("tipe_barang"));
                                 update_textWatt.setText(temp.getString("watt_barang"));
                                 update_textPakai.setText(temp.getString("total_pemakaian"));
                                 update_textJumlah.setText(temp.getString("jumlah"));
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -115,13 +106,13 @@ public class EditBarangActivity extends AppCompatActivity {
                 return data;
             }
         };
-        VolleyManage.getInstance(this).addToRequestQueue(myReq);
+        VolleyManage.getInstance(this).addToRequestQueue(req);
     }
 
-    private void editProcess(){
-        final String id_user = String.valueOf(user.getId());
-//        final String tipe = ;
-//        final String watt = ;
+    private void editProcess(int id){
+        final String temp = String.valueOf(id);
+        final String tipe = update_textTipe.getText().toString().trim();
+        final String watt = update_textWatt.getText().toString().trim();
         final String jumlah = update_textJumlah.getEditableText().toString().trim();
         final String pakai = update_textPakai.getEditableText().toString().trim();
         String url = "http://54.145.5.105/update-item.php";
@@ -136,18 +127,21 @@ public class EditBarangActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 }
                 ){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> data = new HashMap<>();
-    //            data.("id", id_item);
-                return super.getParams();
+                data.put("id", temp);
+                data.put("tipe_barang",tipe);
+                data.put("jumlah",jumlah);
+                data.put("watt_barang",watt);
+                data.put("total_pemakaian",pakai);
+                return data;
             }
         };
-
+        VolleyManage.getInstance(this).addToRequestQueue(req);
         }
 
 
