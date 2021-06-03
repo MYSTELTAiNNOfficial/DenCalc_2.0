@@ -91,7 +91,8 @@ public class ListBarangFragment extends Fragment {
         frList_button_hitungBiaya.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Calculated, Go Back to Home!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), FragmentActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                Toast.makeText(getContext(), "Calculated", Toast.LENGTH_SHORT).show();
             }
         });
     }

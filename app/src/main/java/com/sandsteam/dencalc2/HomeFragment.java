@@ -32,7 +32,9 @@ public class HomeFragment extends Fragment{
     private TextView frhome_editText_totalBiaya, choosenGolongan, choosenVA, choosenRupiah;
 
     private String[] tempGolongan = Storage.choosenGolongan;
-    private String nama_golongan = "", va_golongan = "", toString_rupiahGolongan = "",total_Biaya;
+    private String nama_golongan = "";
+    private String va_golongan = "";
+    private String toString_rupiahGolongan = "";
     private double rupiah_golongan = 0;
 
     @Override
@@ -49,7 +51,7 @@ public class HomeFragment extends Fragment{
         frhome_simpanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                frhome_editText_totalBiaya.setText((hitungBiaya(barangs, rupiah_golongan)));
+
                 tempGolongan [0] = nama_golongan;
                 tempGolongan [1] = va_golongan;
                 tempGolongan [2] = "Rp "+ rupiah_golongan +",-";
@@ -64,47 +66,40 @@ public class HomeFragment extends Fragment{
                     nama_golongan = "R-1/TR";
                     va_golongan = "450";
                     rupiah_golongan = 165;
-//                    tempGolongan = String.valueOf(parent.getItemAtPosition(position));
                 }else if(position == 1){
                     nama_golongan = "R-1/TR";
                     va_golongan = "900";
                     rupiah_golongan = 274;
-//                    tempGolongan = parent.getItemAtPosition(position).toString();
                 }else if(position == 2){
                     nama_golongan = "R-1M/TR";
                     va_golongan = "900";
                     rupiah_golongan = 1352;
-//                    tempGolongan = parent.getItemAtPosition(position).toString();
                 }else if(position == 3){
                     nama_golongan = "R-1/TR";
                     va_golongan = "1300";
                     rupiah_golongan = 1444.70;
-//                    tempGolongan = parent.getItemAtPosition(position).toString();
                 }else if(position == 4){
                     nama_golongan = "R-1/TR";
                     va_golongan = "2200";
                     rupiah_golongan = 1444.70;
-//                    tempGolongan = parent.getItemAtPosition(position).toString();
                 }else if(position == 5){
                     nama_golongan = "R-2/TR";
                     va_golongan = "5500";
                     rupiah_golongan = 1444.70;
-//                    tempGolongan = parent.getItemAtPosition(position).toString();
                 }else if(position == 6) {
                     nama_golongan = "R-3/TR";
                     va_golongan = "> 5500";
                     rupiah_golongan = 1444.70;
-//                    tempGolongan = parent.getItemAtPosition(position).toString();
                 }
                 toString_rupiahGolongan = "Rp "+String.valueOf(rupiah_golongan)+"/kWH";
                 choosenGolongan.setText(nama_golongan);
                 choosenVA.setText(va_golongan + " Volt Ampere");
                 choosenRupiah.setText(toString_rupiahGolongan);
+                frhome_editText_totalBiaya.setText((hitungBiaya()));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -127,7 +122,7 @@ public class HomeFragment extends Fragment{
     }
 
 
-    public String hitungBiaya(ArrayList<Barang> barangs, double rupiah_golongan){
+    public String hitungBiaya(){
         double wattHours = 0;
         double kiloWattHours, hari, bulan;
         for(int i = 0; i < barangs.size(); i++){
@@ -138,13 +133,10 @@ public class HomeFragment extends Fragment{
             double temp = wattTemp*pemakaianTemp*jumlahTemp;
             wattHours += temp;
         }
-        Toast.makeText(getContext(), String.valueOf(wattHours), Toast.LENGTH_SHORT).show();
         kiloWattHours = wattHours / 1000;
         hari = kiloWattHours * rupiah_golongan;
         bulan = hari * 30;
-        new DecimalFormat("##.##").format(bulan);
-        total_Biaya = String.valueOf(bulan);
-        return total_Biaya;
+        return String.valueOf(bulan);
     }
 
 }
