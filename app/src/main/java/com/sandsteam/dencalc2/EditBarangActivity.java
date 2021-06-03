@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import AddOn.User;
+import AddOn.VolleyManage;
 
 public class EditBarangActivity extends AppCompatActivity {
 
@@ -36,14 +37,12 @@ public class EditBarangActivity extends AppCompatActivity {
     private Button edit_button;
     private Toolbar edit_toolbar;
 
-    private int id;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_barang);
 
-        id = getIntent().getIntExtra("id", 0);
+        int id = getIntent().getIntExtra("id_item", 0);
 
         initView();
         loadDB(id);
@@ -72,14 +71,15 @@ public class EditBarangActivity extends AppCompatActivity {
     private void initView() {
         update_textTipe = findViewById(R.id.edit_textTipe);
         update_textWatt = findViewById(R.id.edit_textWatt);
-        update_textPakai = findViewById(R.id.tambah_textPakai);
-        update_textJumlah = findViewById(R.id.tambah_textJumlah);
+        update_textPakai = findViewById(R.id.edit_textPakai);
+        update_textJumlah = findViewById(R.id.edit_textjumlah);
         edit_button = findViewById(R.id.edit_button);
         edit_toolbar = findViewById(R.id.edit_toolbar);
 
     }
 
-    private void loadDB(int index){
+    private void loadDB(int id){
+        final String temp = String.valueOf(id);
         String url = "http://54.145.5.105/readbyid-item.php";
         StringRequest myReq = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -90,10 +90,12 @@ public class EditBarangActivity extends AppCompatActivity {
                             JSONObject temp = obj.getJSONObject("items");
                   //          JSONObject obj1 = temp.getJSONObject(id);
 // ////          ////   Toast.makeText(getApplicationContext(), String.valueOf(obj1.getString("tipe_barang")), Toast.LENGTH_SHORT).show();
-                            update_textTipe.setText(temp.getString("tipe_barang"));
-                            update_textWatt.setText(temp.getString("watt_barang"));
-                            update_textPakai.setText(temp.getString("total_pemakaian"));
-                            update_textJumlah.setText(temp.getString("jumlah_barang"));
+
+                                update_textTipe.setText(temp.getString("tipe_barang"));
+                                update_textWatt.setText(temp.getString("watt_barang"));
+                                update_textPakai.setText(temp.getString("total_pemakaian"));
+                                update_textJumlah.setText(temp.getString("jumlah"));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -104,14 +106,16 @@ public class EditBarangActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }
+        ){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> data = new HashMap<>();
-                data.put("id", String.valueOf(id));
-                return super.getParams();
+                data.put("id", temp);
+                return data;
             }
         };
+        VolleyManage.getInstance(this).addToRequestQueue(myReq);
     }
 
     private void editProcess(){
