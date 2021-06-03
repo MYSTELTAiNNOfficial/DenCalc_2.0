@@ -1,5 +1,6 @@
 package com.sandsteam.dencalc2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,15 +36,17 @@ public class EditBarangActivity extends AppCompatActivity {
     private Button edit_button;
     private Toolbar edit_toolbar;
 
+    private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_barang);
 
-        String id_item = getIntent().getStringExtra("id_item");
-        int index = getIntent().getIntExtra("index", 0);
+        id = getIntent().getIntExtra("id", 0);
 
         initView();
+        loadDB(id);
         setListen();
     }
 
@@ -59,7 +63,6 @@ public class EditBarangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 editProcess();
             }
         });
@@ -74,10 +77,9 @@ public class EditBarangActivity extends AppCompatActivity {
         edit_button = findViewById(R.id.edit_button);
         edit_toolbar = findViewById(R.id.edit_toolbar);
 
-        loadDB();
     }
 
-    private void loadDB(){
+    private void loadDB(int index){
         String url = "http://54.145.5.105/readbyid-item.php";
         StringRequest myReq = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -85,12 +87,13 @@ public class EditBarangActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject obj = new JSONObject(response);
-                            JSONArray temp = obj.getJSONArray("items");
-                            JSONObject obj1 = temp.getJSONObject(10);
-                            update_textTipe.setText(obj1.getString("tipe_barang"));
-                            update_textWatt.setText(String.valueOf(obj1.getInt("watt_barang")));
-                            update_textPakai.setText(String.valueOf(obj1.getInt("total_pemakaian")));
-                            update_textJumlah.setText(String.valueOf(obj1.getInt("jumlah_barang")));
+                            JSONObject temp = obj.getJSONObject("items");
+                  //          JSONObject obj1 = temp.getJSONObject(id);
+// ////          ////   Toast.makeText(getApplicationContext(), String.valueOf(obj1.getString("tipe_barang")), Toast.LENGTH_SHORT).show();
+                            update_textTipe.setText(temp.getString("tipe_barang"));
+                            update_textWatt.setText(temp.getString("watt_barang"));
+                            update_textPakai.setText(temp.getString("total_pemakaian"));
+                            update_textJumlah.setText(temp.getString("jumlah_barang"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -101,7 +104,14 @@ public class EditBarangActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data = new HashMap<>();
+                data.put("id", String.valueOf(id));
+                return super.getParams();
+            }
+        };
     }
 
     private void editProcess(){

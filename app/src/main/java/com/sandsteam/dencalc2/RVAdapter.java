@@ -87,11 +87,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.BarangViewHold> {
                     final String id_item = String.valueOf(liistBarang.get(index).getId());
                     Intent intent = new Intent(context, EditBarangActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra("id_item", id_item);
-                    intent.putExtra("index", index);
+                    intent.putExtra("id", index);
                     context.startActivity(intent);
-
-
                 }
             });
 
