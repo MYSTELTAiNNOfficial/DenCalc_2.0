@@ -40,7 +40,7 @@ public class ListBarangFragment extends Fragment {
     private View view;
     private User user;
     private Button frList_buttonTambah;
-    private TextView frList_text_golonganInfo, no_data_information;
+    private TextView frList_text_golonganInfo;
     private RecyclerView frList_recyclerViewBarang;
     private static ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
@@ -64,9 +64,8 @@ public class ListBarangFragment extends Fragment {
         frList_recyclerViewBarang = view.findViewById(R.id.frList_recyclerViewBarang);
         frList_button_hitungBiaya = view.findViewById(R.id.frList_button_hitungBiaya);
         frList_text_golonganInfo = view.findViewById(R.id.frList_text_golonganInfo);
-        no_data_information = view.findViewById(R.id.no_data_information);
 
-        barangs = Storage.barangs;
+        barangs = new ArrayList<>();
         String golongan = Storage.choosenGolongan[0] + " | " + Storage.choosenGolongan[1] + " Volt Ampere | " + Storage.choosenGolongan[2]+"/kWH";
 
         rvAdapter = new RVAdapter(barangs);
@@ -116,6 +115,7 @@ public class ListBarangFragment extends Fragment {
                                 barangBaru.setTotal_pemakaian(obj1.getInt("total_pemakaian"));
                                 barangBaru.setJumlah(obj1.getInt("jumlah"));
                                 barangs.add(barangBaru);
+                                Storage.barangs = barangs;
                             }
                             rvAdapter.notifyDataSetChanged();
 

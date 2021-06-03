@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment{
                 frhome_editText_totalBiaya.setText((hitungBiaya(barangs, rupiah_golongan)));
                 tempGolongan [0] = nama_golongan;
                 tempGolongan [1] = va_golongan;
-                tempGolongan [2] = "Rp "+String.valueOf(rupiah_golongan)+",-";
+                tempGolongan [2] = "Rp "+ rupiah_golongan +",-";
                 Toast.makeText(getContext(), "Golongan Dipilih: "+tempGolongan[0], Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,9 +107,6 @@ public class HomeFragment extends Fragment{
 
             }
         });
-
-
-
     }
 
     private void initView() {
