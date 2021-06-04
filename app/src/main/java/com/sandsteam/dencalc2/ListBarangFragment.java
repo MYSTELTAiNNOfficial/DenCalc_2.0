@@ -36,7 +36,6 @@ import AddOn.VolleyManage;
 
 
 public class ListBarangFragment extends Fragment {
-
     private View view;
     private User user;
     private Button frList_buttonTambah;
@@ -45,9 +44,6 @@ public class ListBarangFragment extends Fragment {
     private static ArrayList<Barang> barangs;
     private RVAdapter rvAdapter;
     private Button frList_button_hitungBiaya;
-
-    private Storage gate;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

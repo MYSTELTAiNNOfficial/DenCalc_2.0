@@ -91,7 +91,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.BarangViewHold> {
                     context.startActivity(intent);
                 }
             });
-
         }
     }
     private void deleteProcess(String id_item, int index){
@@ -108,7 +107,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.BarangViewHold> {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 }
         ){

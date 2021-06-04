@@ -62,7 +62,6 @@ public class TambahActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, tipe_barang);
         arrayAdapter_tipe.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tambah_spinnerTipe.setAdapter(arrayAdapter_tipe);
-
     }
 
     @Override
