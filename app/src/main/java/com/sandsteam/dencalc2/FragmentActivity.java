@@ -31,12 +31,12 @@ public class FragmentActivity extends AppCompatActivity {
     {
         if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
         {
-            SharedPref.getInstance(getApplicationContext()).logout();
+            finish();
             super.onBackPressed();
             return;
         }
         else {
-            Toast.makeText(getBaseContext(), "Press back again to logout", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
         }
 
         mBackPressed = System.currentTimeMillis();
