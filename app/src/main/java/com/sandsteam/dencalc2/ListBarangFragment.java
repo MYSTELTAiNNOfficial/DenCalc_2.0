@@ -95,7 +95,7 @@ public class ListBarangFragment extends Fragment {
 
     private void loadDB() {
         final String id = String.valueOf(user.getId());
-        String url = "http://54.145.5.105/read-item.php";
+        String url = "http://178.128.127.125/API/read-item.php";
         StringRequest req = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

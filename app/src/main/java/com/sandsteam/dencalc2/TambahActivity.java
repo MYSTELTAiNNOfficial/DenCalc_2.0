@@ -142,7 +142,7 @@ public class TambahActivity extends AppCompatActivity {
         final String id_user = String.valueOf(user.getId());
         final String jumlah = tambah_textJumlah.getEditableText().toString().trim();
         final String pakai = tambah_textPakai.getEditableText().toString().trim();
-        String url = "http://54.145.5.105/add-item.php";
+        String url = "http://178.128.127.125/API/add-item.php";
         StringRequest req = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

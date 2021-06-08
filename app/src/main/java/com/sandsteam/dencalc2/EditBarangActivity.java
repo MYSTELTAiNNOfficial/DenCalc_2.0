@@ -75,7 +75,7 @@ public class EditBarangActivity extends AppCompatActivity {
 
     private void loadDB(int id){
         final String temp = String.valueOf(id);
-        String url = "http://54.145.5.105/readbyid-item.php";
+        String url = "http://178.128.127.125/API/readbyid-item.php";
         StringRequest req = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -114,7 +114,7 @@ public class EditBarangActivity extends AppCompatActivity {
         final String watt = update_textWatt.getText().toString().trim();
         final String jumlah = update_textJumlah.getEditableText().toString().trim();
         final String pakai = update_textPakai.getEditableText().toString().trim();
-        String url = "http://54.145.5.105/update-item.php";
+        String url = "http://178.128.127.125/API/update-item.php";
         StringRequest req = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

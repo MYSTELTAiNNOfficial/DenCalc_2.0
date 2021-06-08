@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void process() {
-        String url = "http://54.145.5.105/login.php";
+        String url = "http://178.128.127.125/API/login.php";
         final String username = login_textInputUser.getEditText().getText().toString().trim();
         final String password = login_textInputPass.getEditText().getText().toString().trim();
         StringRequest myReq  = new StringRequest (Request.Method.POST, url, new Response.Listener<String>() {
