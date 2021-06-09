@@ -178,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
     private void process(){
-        String url = "http://178.128.127.125/API/register.php";
+        String url = "http://your.pc.ip.address/API/register.php";
         final String username = regis_textInputUser.getEditText().getText().toString().trim();
         final String password = regis_textInputPass.getEditText().getText().toString().trim();
         StringRequest myReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
